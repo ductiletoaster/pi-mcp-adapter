@@ -1,0 +1,16 @@
+# gitleaks config for the CI gate. Extends the default rules; allowlists the
+# example OAuth tokens in OAUTH.md — they are documentation placeholders, not
+# real credentials (verified: `eyJhbGci…` is a bare JWT header stub, `dGhpcy…`
+# is base64 for "this is a refresh token"), inherited from the upstream fork.
+title = "pi-mcp-adapter gitleaks"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "OAUTH.md documentation placeholders"
+regexTarget = "match"
+regexes = [
+  '''eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.\.\.''',
+  '''dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4\.\.\.''',
+]
